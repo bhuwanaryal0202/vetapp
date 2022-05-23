@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +8,22 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  // create variables in the field 
+  allData:string = "";
+  message:string = "";
+
+  constructor(private data:DataService) {}
+
+  // get all the records in Json array
+  getAllRecords(){
+    this.data.getAllData().subscribe(
+      (d:any)=>{
+        this.allData = JSON.stringify(d);
+      },
+      (err:any)=>{
+        this.message = "There are no records";
+      }
+    )
+  }
 
 }
